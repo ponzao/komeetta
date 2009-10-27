@@ -77,12 +77,3 @@ function List:sort()
     return self:qsort()
 end
 
-math.randomseed(os.time())
-local rands = {}
-for i = 1, 10 do
-    rands[i] = math.random(1, 10)
-end
-
-randomList = List:new(unpack(rands))
-print(randomList)
-print(randomList:sort())
