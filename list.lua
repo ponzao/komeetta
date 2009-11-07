@@ -9,6 +9,10 @@ function List:new(...)
     return o
 end
 
+function List:length()
+    return #self
+end
+
 function List:reverse()
     local result = List:new()
     for i = 1, #self do
@@ -60,8 +64,20 @@ function List:concat(...)
     return result
 end
 
+function List:null()
+    return #self == 0
+end
+
+function List:foldr(f, v)
+    if self:null() then
+        return v
+    else
+        return f(self:head(), self:tail():foldr(f, v))
+    end
+end
+
 function List:qsort()
-    if #self == 0 then
+    if self:null() then
         return List:new()
     else
         return self:tail():filter(function(x)
@@ -77,3 +93,15 @@ function List:sort()
     return self:qsort()
 end
 
+
+-- TODO The following functions are not list functions.
+
+function replicate(n, v)
+    local result = List:new()
+    for i = 1, n do
+        result[#result + 1] = v
+    end
+    return result
+end
+
+print(List:new(1,2,3,4,5,6,7,8,9,10):foldr(function(a,b) return a+b end, 0))
