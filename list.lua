@@ -21,6 +21,12 @@ function List:reverse()
     return result
 end
 
+function List:foreach(f)
+    for i = 1, #self do
+        f(self[i])
+    end
+end
+
 function List:map(f)
     local result = List:new()
     for i = 1, #self do
@@ -103,5 +109,3 @@ function replicate(n, v)
     end
     return result
 end
-
-print(List:new(1,2,3,4,5,6,7,8,9,10):foldr(function(a,b) return a+b end, 0))
