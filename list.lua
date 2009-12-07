@@ -99,6 +99,13 @@ function List:sort()
     return self:qsort()
 end
 
+function List:take(n)
+    local result = List:new()
+    for i = 1, n do
+        result[i] = self[i]
+    end
+    return result
+end
 
 -- TODO The following functions are not list functions.
 
