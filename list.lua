@@ -1,3 +1,8 @@
+local ipairs = ipairs
+local setmetatable= setmetatable
+local table = table
+module("list")
+
 List = {}
 function List:new(...)
     local o = { ... }
