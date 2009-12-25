@@ -1,7 +1,7 @@
 local ipairs = ipairs
-local setmetatable= setmetatable
+local setmetatable = setmetatable
 local table = table
-module("list")
+module("komeetta")
 
 List = {}
 function List:new(...)
