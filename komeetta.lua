@@ -15,7 +15,7 @@ function List:new(...)
 end
 
 function List:clone()
-    local result = {}
+    local result = List:new()
     for i = 1, #self do
         result[i] = self[i]
     end
@@ -85,6 +85,14 @@ end
 
 function List:null()
     return #self == 0
+end
+
+function List:slice(from, to)
+    local result = List:new()
+    for i = from, to do
+        result[#result + 1] = self[i]
+    end
+    return result;
 end
 
 function List:foldr(f, v)
