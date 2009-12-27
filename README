@@ -1,1 +1,10 @@
 Komeetta is project containing a functional-style list and list functions in Lua. Perhaps in the future it will contain other functional stuff as well. The word "komeetta" is Finnish and means "comet", but because that word is already used in another Lua project I decided to use the Finnish translation. "Comet" is a good word for a list implementation because a comet has a head and a tail.
+
+Usage:
+require("komeetta")
+list = komeetta.List:new(5, -3, 1) -- (5 -3 1)
+sorted_list = list:sort() -- (-3 1 5)
+
+None of the functions will modify the original collection. So you can safely chain them together like this:
+...
+komeetta.List:new(5, -3, 1):sort():reverse() -- (5 1 -3)
