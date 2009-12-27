@@ -14,6 +14,14 @@ function List:new(...)
     return o
 end
 
+function List:clone()
+    local result = {}
+    for i = 1, #self do
+        result[i] = self[i]
+    end
+    return result
+end
+
 function List:length()
     return #self
 end
