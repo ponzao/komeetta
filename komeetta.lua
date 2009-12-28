@@ -8,7 +8,7 @@ function List:new(...)
     local o = { ... }
     self.__index = self
     self.__tostring = function(l)
-        return "(" .. table.concat(l, " ") .. ")"
+        return "List(" .. table.concat(l, " ") .. ")"
     end
     setmetatable(o, self)
     return o
