@@ -117,7 +117,9 @@ function List:qsort()
 end
 
 function List:sort()
-    return self:qsort()
+    local result = self:clone()
+    table.sort(result)
+    return result
 end
 
 function List:take(n)
