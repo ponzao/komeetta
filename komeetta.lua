@@ -1,6 +1,7 @@
 local ipairs = ipairs
 local setmetatable = setmetatable
 local table = table
+local print = print
 module("komeetta")
 
 List = {}
@@ -12,6 +13,14 @@ function List:new(...)
     end
     setmetatable(o, self)
     return o
+end
+
+function List:new_from_table(t)
+    local result = List:new()
+    for i = 1, #t do
+        result[#result + 1] = t[i] 
+    end
+    return result
 end
 
 function List:clone()
