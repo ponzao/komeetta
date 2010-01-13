@@ -11,6 +11,8 @@
 -- > list = komeetta.List:new(1, 2, 3, 4)
 -- > print(list:reverse():map(function(n) return 2 * n end))
 -- List(8 6 4 2)
+-- > print(list)
+-- List(1 2 3 4)
 --]]
 local ipairs = ipairs
 local setmetatable = setmetatable
