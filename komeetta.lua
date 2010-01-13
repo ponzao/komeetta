@@ -1,10 +1,10 @@
 --[[
 -- komeetta - Vesa Marttila (vesa.marttila@helsinki.fi)
 --
--- A functional style table-wrapper and functions for Lua. None of the functions
--- alter the given list. For example list:reverse() returns a new list and 
--- doesn't touch the original one. The lists though are currently accessible
--- via other methods (e.g. list.foo = 100).
+-- Functional style list and functions. None of the functions alter the given
+-- list. For example list:reverse() returns a new list and doesn't touch the
+-- original one. The lists are currently accessible via other methods though
+-- (e.g. list.foo = 100).
 --
 -- Usage:
 -- > require("komeetta")
@@ -17,6 +17,7 @@ local setmetatable = setmetatable
 local table = table
 local print = print
 local error = error
+
 module("komeetta")
 
 List = {}
@@ -25,7 +26,7 @@ List = {}
 -- Creates a new list with given parameters.
 --
 -- Usage:
--- > list = List:new(1, "foo", 7)
+-- > list = komeetta.List:new(1, "foo", 7)
 -- > print(list)
 -- List(1 foo 7)
 -- ]]
@@ -44,7 +45,7 @@ end
 -- if values in table are stored with as key-value pairs.
 --
 -- Usage:
--- > list = List:new({1, 2, 3})
+-- > list = komeetta.List:new({1, 2, 3})
 -- > print(list)
 -- List(1 2 3)
 --]]
@@ -60,7 +61,7 @@ end
 -- Clones the existing list.
 --
 -- Usage:
--- > list = List:new(1, 2, 3)
+-- > list = komeetta.List:new(1, 2, 3)
 -- > cloned_list = list:clone()
 -- > print(list, cloned_list)
 -- List(1 2 3)      List(1 2 3)
@@ -77,7 +78,7 @@ end
 -- Returns the length of the list.
 --
 -- Usage:
--- > list = List:new(1, 2, 3)
+-- > list = komeetta.List:new(1, 2, 3)
 -- > print(list:length())
 -- 3
 --]]
@@ -89,7 +90,7 @@ end
 -- Returns a copy of the given list reversed.
 -- 
 -- Usage:
--- > list = List:new(1, 2, 3)
+-- > list = komeetta.List:new(1, 2, 3)
 -- > print(list:reverse())
 -- List(3, 2, 1)
 --]]
@@ -105,7 +106,7 @@ end
 -- Applies the given function to all the members in the list.
 --
 -- Usage:
--- > List:new(1, 2, 3):foreach(print)
+-- > komeetta.List:new(1, 2, 3):foreach(print)
 -- 1
 -- 2
 -- 3
@@ -120,7 +121,7 @@ end
 -- Returns a copy of the list with 'f' applied to each of its members.
 --
 -- Usage:
--- > List:new(1,2,3):map(function(n) return 2 * n end)
+-- > komeetta.List:new(1,2,3):map(function(n) return 2 * n end)
 -- List(2, 4, 6)
 --]]
 function List:map(f)
@@ -131,6 +132,13 @@ function List:map(f)
     return result
 end
 
+--[[
+-- Returns a list without the filtered values.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3, 4):filter(function(n) return n <= 2 end))
+-- List(1 2)
+--]]
 function List:filter(f)
     local result = List:new()
     for i = 1, #self do
@@ -141,10 +149,24 @@ function List:filter(f)
     return result
 end
 
+--[[
+-- Returns the first value in the list.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3):head())
+-- 1
+--]]
 function List:head()
     return self[1]
 end
 
+--[[
+-- Returns a new list starting from the second value in the list.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3):tail())
+-- List(2 3)
+--]]
 function List:tail()
     local result = List:new()
     for i = 2, #self do
@@ -153,6 +175,17 @@ function List:tail()
     return result
 end
 
+--[[
+-- Returns a new list with the given list arguments concatenated into the
+-- original one.
+--
+-- Usage:
+-- > a = komeetta.List:new(1, 2)
+-- > b = komeetta.List:new(3, 4)
+-- > c = komeetta.List:new(-4, 10)
+-- > print(a:concat(b, c))
+-- List(1 2 3 4 -4 10)
+--]]
 function List:concat(...)
     local result = List:new()
     for i = 1, #self do
@@ -166,10 +199,25 @@ function List:concat(...)
     return result
 end
 
+--[[
+-- Returns true if list has no values.
+--
+-- Usage:
+-- > print(komeetta.List:new():null())
+-- true
+--]]
 function List:null()
     return #self == 0
 end
 
+--[[
+-- Returns a "slice" of the list. First argument is the first index and second
+-- the last index to include in the list.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 199, 87, -4):slice(2, 3))
+-- List(199 87)
+--]]
 function List:slice(from, to)
     local result = List:new()
     for i = from, to do
@@ -178,6 +226,15 @@ function List:slice(from, to)
     return result;
 end
 
+--[[
+-- Returns the value after performing folding from right on the given list.
+-- First argument is the function to apply and second the default value.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3, 4, 5):foldr(function(a, b) return a * b
+--                                                end, 1))
+-- 120
+--]]
 function List:foldr(f, v)
     if self:null() then
         return v
@@ -186,6 +243,14 @@ function List:foldr(f, v)
     end
 end
 
+--[[
+-- Sorts the list with quicksort. This implementation is not fast and I 
+-- recommend using "sort" instead.
+--
+-- Usage:
+-- > print(komeetta.List:new(10, -4, 1):qsort())
+-- List(-4 1 10)
+--]]
 function List:qsort()
     if self:null() then
         return List:new()
@@ -198,13 +263,27 @@ function List:qsort()
                         qsort()))
     end
 end
-
+--
+--[[
+-- Sorts the list with Lua's built in sort.
+--
+-- Usage:
+-- > print(komeetta.List:new(10, -4, 1):sort())
+-- List(-4 1 10)
+--]]
 function List:sort()
     local result = self:clone()
     table.sort(result)
     return result
 end
 
+--[[
+-- Returns a list consisting of n-amount of values starting from the list head.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3):take(2))
+-- List(1 2)
+--]]
 function List:take(n)
     local result = List:new()
     for i = 1, n do
@@ -213,8 +292,14 @@ function List:take(n)
     return result
 end
 
--- TODO The following functions are not list functions.
-
+--[[
+-- Creates a list consisting of the second argument. The amount of values is
+-- based on the size of the first argument.
+--
+-- Usage:
+-- > komeetta.replicate(3, "foo")
+-- List(foo foo foo)
+--]]
 function replicate(n, v)
     local result = List:new()
     for i = 1, n do
@@ -222,3 +307,4 @@ function replicate(n, v)
     end
     return result
 end
+
