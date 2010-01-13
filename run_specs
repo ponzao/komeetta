@@ -1,0 +1,7 @@
+#!/usr/bin/env lua
+
+package.path = "src/?.lua;example/?.lua;"..package.path
+
+dofile("komeetta_spec.lua")
+
+spec:report(true)
