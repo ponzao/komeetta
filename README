@@ -8,3 +8,7 @@ sorted_list = list:sort() -- (-3 1 5)
 None of the functions will modify the original collection. So you can safely chain them together like this:
 ...
 komeetta.List:new(5, -3, 1):sort():reverse() -- (5 1 -3)
+
+To run the tests you will need luaspec (http://github.com/mirven/luaspec). The specs presume you have installed luaspec via luarocks, if this is not the case then you need to modify the "require"-statements in the specs. Once everything is set you need to run the "run_specs"-file.
+
+I would really like to have something similar to Maven in the Lua world.
