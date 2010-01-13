@@ -2,6 +2,7 @@ local ipairs = ipairs
 local setmetatable = setmetatable
 local table = table
 local print = print
+local error = error
 module("komeetta")
 
 List = {}

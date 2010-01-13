@@ -1,3 +1,4 @@
+- make lists immutable?
 - add error handling (aka. throwing)
 - tests
 - comments
