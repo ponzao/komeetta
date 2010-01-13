@@ -1,3 +1,17 @@
+--[[
+-- komeetta - Vesa Marttila (vesa.marttila@helsinki.fi)
+--
+-- A functional style table-wrapper and functions for Lua. None of the functions
+-- alter the given list. For example list:reverse() returns a new list and 
+-- doesn't touch the original one. The lists though are currently accessible
+-- via other methods (e.g. list.foo = 100).
+--
+-- Usage:
+-- > require("komeetta")
+-- > list = komeetta.List:new(1, 2, 3, 4)
+-- > print(list:reverse():map(function(n) return 2 * n end))
+-- List(8 6 4 2)
+--]]
 local ipairs = ipairs
 local setmetatable = setmetatable
 local table = table
@@ -6,7 +20,6 @@ local error = error
 module("komeetta")
 
 List = {}
-
 
 --[[
 -- Creates a new list with given parameters.
@@ -34,7 +47,7 @@ end
 -- > list = List:new({1, 2, 3})
 -- > print(list)
 -- List(1 2 3)
--- ]]
+--]]
 function List:new_from_table(t)
     local result = List:new()
     for i = 1, #t do
@@ -51,7 +64,7 @@ end
 -- > cloned_list = list:clone()
 -- > print(list, cloned_list)
 -- List(1 2 3)      List(1 2 3)
--- ]]
+--]]
 function List:clone()
     local result = List:new()
     for i = 1, #self do
@@ -67,7 +80,7 @@ end
 -- > list = List:new(1, 2, 3)
 -- > print(list:length())
 -- 3
--- ]]
+--]]
 function List:length()
     return #self
 end
@@ -79,7 +92,7 @@ end
 -- > list = List:new(1, 2, 3)
 -- > print(list:reverse())
 -- List(3, 2, 1)
--- ]]
+--]]
 function List:reverse()
     local result = List:new()
     for i = 1, #self do
@@ -96,7 +109,7 @@ end
 -- 1
 -- 2
 -- 3
--- ]]
+--]]
 function List:foreach(f)
     for i = 1, #self do
         f(self[i])
@@ -109,7 +122,7 @@ end
 -- Usage:
 -- > List:new(1,2,3):map(function(n) return 2 * n end)
 -- List(2, 4, 6)
--- ]]
+--]]
 function List:map(f)
     local result = List:new()
     for i = 1, #self do
