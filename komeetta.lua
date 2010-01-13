@@ -6,6 +6,16 @@ local error = error
 module("komeetta")
 
 List = {}
+
+
+--[[
+-- Creates a new list with given parameters.
+--
+-- Usage:
+-- > list = List:new(1, "foo", 7)
+-- > print(list)
+-- List(1 foo 7)
+-- ]]
 function List:new(...)
     local o = { ... }
     self.__index = self
@@ -16,6 +26,15 @@ function List:new(...)
     return o
 end
 
+--[[
+-- Creates a new list from a table given as a parameter. Undefined behavior
+-- if values in table are stored with as key-value pairs.
+--
+-- Usage:
+-- > list = List:new({1, 2, 3})
+-- > print(list)
+-- List(1 2 3)
+-- ]]
 function List:new_from_table(t)
     local result = List:new()
     for i = 1, #t do
@@ -24,6 +43,15 @@ function List:new_from_table(t)
     return result
 end
 
+--[[
+-- Clones the existing list.
+--
+-- Usage:
+-- > list = List:new(1, 2, 3)
+-- > cloned_list = list:clone()
+-- > print(list, cloned_list)
+-- List(1 2 3)      List(1 2 3)
+-- ]]
 function List:clone()
     local result = List:new()
     for i = 1, #self do
@@ -32,10 +60,26 @@ function List:clone()
     return result
 end
 
+--[[
+-- Returns the length of the list.
+--
+-- Usage:
+-- > list = List:new(1, 2, 3)
+-- > print(list:length())
+-- 3
+-- ]]
 function List:length()
     return #self
 end
 
+--[[
+-- Returns a copy of the given list reversed.
+-- 
+-- Usage:
+-- > list = List:new(1, 2, 3)
+-- > print(list:reverse())
+-- List(3, 2, 1)
+-- ]]
 function List:reverse()
     local result = List:new()
     for i = 1, #self do
@@ -44,12 +88,28 @@ function List:reverse()
     return result
 end
 
+--[[
+-- Applies the given function to all the members in the list.
+--
+-- Usage:
+-- > List:new(1, 2, 3):foreach(print)
+-- 1
+-- 2
+-- 3
+-- ]]
 function List:foreach(f)
     for i = 1, #self do
         f(self[i])
     end
 end
 
+--[[
+-- Returns a copy of the list with 'f' applied to each of its members.
+--
+-- Usage:
+-- > List:new(1,2,3):map(function(n) return 2 * n end)
+-- List(2, 4, 6)
+-- ]]
 function List:map(f)
     local result = List:new()
     for i = 1, #self do
