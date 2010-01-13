@@ -31,7 +31,7 @@ List = {}
 -- > list = komeetta.List:new(1, "foo", 7)
 -- > print(list)
 -- List(1 foo 7)
--- ]]
+--]]
 function List:new(...)
     local o = { ... }
     self.__index = self
