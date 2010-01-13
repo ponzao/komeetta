@@ -38,6 +38,17 @@ function List:new(...)
     self.__tostring = function(l)
         return "List(" .. table.concat(l, " ") .. ")"
     end
+    self.__eq = function(a, b)
+        if #a ~= #b then
+            return false
+        end
+        for i = 1, #a do
+            if a[i] ~= b[i] then
+                return false
+            end
+        end
+        return true
+    end
     setmetatable(o, self)
     return o
 end
