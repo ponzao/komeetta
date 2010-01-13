@@ -178,6 +178,19 @@ function List:tail()
 end
 
 --[[
+-- Appends a value into the end of the list.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2, 3):append(4))
+-- List(1 2 3 4)
+--]]
+function List:append(v)
+    local result = self:clone()
+    result[#result + 1] = v
+    return result
+end
+
+--[[
 -- Returns a new list with the given list arguments concatenated into the
 -- original one.
 --
