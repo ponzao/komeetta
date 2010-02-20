@@ -334,3 +334,22 @@ function replicate(n, v)
     return result
 end
 
+-- Convenience methods TODO document
+function lt(a)
+    return function(b)
+        return a > b
+    end
+end
+
+function le(a)
+    return function(b)
+        return a >= b
+    end
+end
+
+function eq(a)
+    return function(b)
+        return a == b
+    end
+end
+
