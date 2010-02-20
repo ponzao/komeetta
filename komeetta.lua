@@ -353,3 +353,15 @@ function eq(a)
     end
 end
 
+function ge(a)
+    return function(b)
+        return a <= b
+    end
+end
+
+function gt(a)
+    return function(b)
+        return a < b
+    end
+end
+
