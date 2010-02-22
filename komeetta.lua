@@ -65,7 +65,7 @@ end
 function List:new_from_table(t)
     local result = List:new()
     for i = 1, #t do
-        result[#result + 1] = t[i] 
+        result[#result + 1] = t[i]
     end
     return result
 end
@@ -101,7 +101,7 @@ end
 
 --[[
 -- Returns a copy of the given list reversed.
--- 
+--
 -- Usage:
 -- > list = komeetta.List:new(1, 2, 3)
 -- > print(list:reverse())
@@ -270,7 +270,7 @@ function List:foldr(f, v)
 end
 
 --[[
--- Sorts the list with quicksort. This implementation is not fast and I 
+-- Sorts the list with quicksort. This implementation is not fast and I
 -- recommend using "sort" instead.
 --
 -- Usage:
