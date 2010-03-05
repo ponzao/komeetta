@@ -1,3 +1,4 @@
 - make lists immutable?
+- list optimization: don't copy append operations just refer to the previous list?
 - add error handling (aka. throwing)
 - add more specs (specifying afterwards doesn't really make any sense :) )
