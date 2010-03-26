@@ -2,3 +2,5 @@
 - list optimization: don't copy append operations just refer to the previous list?
 - add error handling (aka. throwing)
 - add more specs (specifying afterwards doesn't really make any sense :) )
+- function currying
+- __call metamethod overridin, thus List(1,2,3,4) would be possible
