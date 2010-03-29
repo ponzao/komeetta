@@ -5,4 +5,5 @@ list?
 - add more specs (specifying afterwards doesn't really make any sense :) )
 - function currying, e.g. list:map()(function(n)... instead of current
 list:map(function...)
-- __call metamethod overridin, thus List(1,2,3,4) would be possible
+- __call metamethod overridin, thus List(1,2,3,4) would be possible !!! This is
+partially done, not very neat

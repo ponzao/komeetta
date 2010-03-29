@@ -16,6 +16,7 @@
 --]]
 local ipairs = ipairs
 local setmetatable = setmetatable
+local getmetatable = getmetatable
 local table = table
 local print = print
 local error = error
@@ -23,6 +24,9 @@ local error = error
 module("komeetta")
 
 List = {}
+setmetatable(List, { __call = function(list, ...)
+    return list:new(...)
+end})
 
 --[[
 -- Creates a new list with given parameters.
@@ -49,6 +53,7 @@ function List:new(...)
         end
         return true
     end
+    self.__call = getmetatable(List).__call
     setmetatable(o, self)
     return o
 end
