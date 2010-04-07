@@ -9,3 +9,5 @@ list:map(function...)
 partially done, not very neat
 - create rockspec
 - foldl
+- make functions use foldr/foldl instead of iteration (even though it is
+faster)
