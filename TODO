@@ -8,3 +8,4 @@ list:map(function...)
 - __call metamethod overridin, thus List(1,2,3,4) would be possible !!! This is
 partially done, not very neat
 - create rockspec
+- foldl
