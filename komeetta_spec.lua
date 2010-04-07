@@ -103,4 +103,9 @@ describe["A List"] = function()
                 List:new(1, 2, -100)):tail():slice(2, 5):sort():take(2)
         expect(list_with_values).should_be(List:new(1, 2, 3, 4))
     end
+
+    it["has a method for calculating the product of its elements"] = 
+        function()
+        expect(list_with_values:product()).should_be(24)
+    end
 end

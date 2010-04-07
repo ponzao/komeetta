@@ -324,6 +324,17 @@ function List:take(n)
 end
 
 --[[
+-- Returns the multiplication of all the elements in the list.
+--
+-- Usage:
+-- > print(komeetta.List:new(2, 3, 4):product())
+-- 24
+--]]
+function List:product()
+    return self:foldr(function(a, b) return a * b end, 1)
+end
+
+--[[
 -- Creates a list consisting of the second argument. The amount of values is
 -- based on the size of the first argument.
 --
