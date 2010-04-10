@@ -271,11 +271,10 @@ function List:foldr(f, v)
 end
 
 function List:foldl(v)
-    if self:null() then
-        return v
-    else
-        return function(f)
-            print(f)
+    return function(f)
+        if self:null() then
+            return v
+        else
             return self:tail():foldl(f(v, self:head()))(f)
         end
     end

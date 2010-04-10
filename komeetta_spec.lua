@@ -82,6 +82,11 @@ describe["A List"] = function()
             1)).should_be(24) 
     end
 
+    it["can be folded from left"] = function()
+        expect(list_with_values:foldl(0)(
+            function(a, b) return a - b end)).should_be(-10) 
+    end
+
     it['can be sorted with "qsort"'] = function()
         expect(List:new(10, -4, 1, -1000):qsort()).should_be(
             List:new(-1000, -4, 1, 10)) 
