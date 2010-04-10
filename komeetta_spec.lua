@@ -45,9 +45,13 @@ describe["A List"] = function()
         expect(list_from_table:reverse()).should_be(List:new("bar", "foo"))
     end
 
-    --TODO Test foreach.
-    --it["foreach"] = function()
-    --end
+    it["should have a function for performing operations on each element"] = function()
+        local length = 0
+        List:new(1,2,3):foreach()(function() 
+            length = length + 1
+        end)
+        expect(length).should_be(3)
+    end
     
     it["can be applied with a map function to return a new list"] = function()
         expect(list_from_table:map()(string.upper)).should_be(
