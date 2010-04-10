@@ -26,6 +26,10 @@ describe["A List"] = function()
         expect(list:append(10)).should_be(List:new(10))
     end
 
+    it["should allow items to be prepended"] = function()
+        expect(list_with_values:prepend(10)).should_be(List:new(10, 1, 2, 3, 4))
+    end
+
     it["should allow items to be appended several times"] = function()
         expect(list:append(10):append(100):append(20)).should_be(
             List:new(10, 100, 20))

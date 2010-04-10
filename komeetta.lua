@@ -74,11 +74,9 @@ function List:length()
 end
 
 function List:reverse()
-    local result = List:new()
-    for i = 1, #self do
-        result[i] = self[#self - i + 1]
-    end
-    return result
+    return self:foldl(List:new())(function(list, element)
+        return list:prepend(element)
+    end)
 end
 
 function List:foreach()
@@ -120,9 +118,11 @@ function List:tail()
 end
 
 function List:append(v)
-    local result = self:clone()
-    result[#result + 1] = v
-    return result
+    return self:concat(List:new(v))
+end
+
+function List:prepend(v)
+    return List:new(v):concat(self)
 end
 
 function List:concat(...)
