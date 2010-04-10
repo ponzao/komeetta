@@ -50,12 +50,12 @@ describe["A List"] = function()
     --end
     
     it["can be applied with a map function to return a new list"] = function()
-        expect(list_from_table:map(string.upper)).should_be(
+        expect(list_from_table:map()(string.upper)).should_be(
             List:new("FOO", "BAR"))
     end
 
     it["can be filtered"] = function()
-        expect(list_with_values:filter(function(n) return n <= 2 end)).
+        expect(list_with_values:filter()(function(n) return n <= 2 end)).
             should_be(List:new(1, 2))
     end
 
@@ -78,8 +78,8 @@ describe["A List"] = function()
     end
 
     it["can be folded from right"] = function()
-        expect(list_with_values:foldr(function(a, b) return a * b end,
-            1)).should_be(24) 
+        expect(list_with_values:foldr(1)(
+            function(a, b) return a * b end)).should_be(24) 
     end
 
     it["can be folded from left"] = function()
@@ -103,9 +103,11 @@ describe["A List"] = function()
 
     it["is not mutable by its methods"] = function()
         expect(list_with_values).should_be(List:new(1, 2, 3, 4))
-        list:reverse():append(100):reverse():append(-21):take(4):map(function(n)
-            return 100 * n end):filter(function(n) return n >= 100 end):concat(
-                List:new(1, 2, -100)):tail():slice(2, 5):sort():take(2)
+        list:reverse():append(100):reverse():append(-21):take(4):map()(
+            function(n)
+                return 100 * n end):filter()(
+                    function(n) return n >= 100 end):concat(
+                        List:new(1, 2, -100)):tail():slice(2, 5):sort():take(2)
         expect(list_with_values).should_be(List:new(1, 2, 3, 4))
     end
 
