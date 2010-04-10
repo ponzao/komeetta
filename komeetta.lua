@@ -316,11 +316,7 @@ end
 -- List(1 2)
 --]]
 function List:take(n)
-    local result = List:new()
-    for i = 1, n do
-        result[i] = self[i]
-    end
-    return result
+    return self:slice(1, n)
 end
 
 --[[
