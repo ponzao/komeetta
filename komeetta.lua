@@ -186,11 +186,7 @@ end
 -- List(2 3)
 --]]
 function List:tail()
-    local result = List:new()
-    for i = 2, #self do
-        result[#result + 1] = self[i]
-    end
-    return result
+    return self:slice(2, self:length())
 end
 
 --[[
