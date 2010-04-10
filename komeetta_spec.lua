@@ -87,7 +87,7 @@ describe["A List"] = function()
             List:new(-1000, -4, 1, 10)) 
     end
 
-    it['can be sorted with "sorted"'] = function()
+    it['can be sorted with "sort"'] = function()
         expect(List:new(10, -4, 1, -1000):sort()).should_be(
             List:new(-1000, -4, 1, 10)) 
     end
