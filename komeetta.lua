@@ -270,6 +270,14 @@ function List:foldr(f, v)
     end
 end
 
+--[[
+-- Returns a function that will take a function as a parameter.
+-- Performs a fold from left.
+--
+-- Usage:
+-- > print(komeetta.List:new(1, 2):foldl(0)(function(a, b) return a - b end)
+-- -3
+--]]
 function List:foldl(v)
     return function(f)
         if self:null() then
